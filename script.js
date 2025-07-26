@@ -1,8 +1,8 @@
 // console.log("Hello World");
 
-// Declare global scope scores
-let humanScore = 0;
-let computerScore = 0;
+// Initialize global scope scores
+let intHumanScore = 0;
+let intCompScore = 0;
 
 // Function to play computer's choice
 function getComputerChoice()
