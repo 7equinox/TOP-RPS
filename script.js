@@ -108,6 +108,14 @@ function playRound(strUserChoice, strCompChoice)
         console.log("You win! Scissors beats Paper");
         intHumanScore++;
     }
+
+    else
+    {
+        // Capitalize choice
+        const strBothChoice = strUserChoice.charAt(0).toUppercase + strUserChoice.slice(1);
+
+        console.log(`Draw! Both choose ${strBothChoice}`);
+    }
 }
 
 // Initialize variables to their choices

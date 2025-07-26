@@ -28,3 +28,4 @@
 7) else if user picks paper and computer picks scissors, display "You lose! Scissors beats paper" and increment intCompScore.
 8) else if user picks scissors and computer picks rock, display "You lose! Rock beats Scissors" and increment intCompScore.
 9) else if user picks scissors and computer picks paper, display "You win! Scissors beats Paper" and increment intHumanScore.
+10) otherwise draw, display `Draw! Both choose ${Rock/Paper/Scissors}`.
