@@ -38,3 +38,20 @@ function getComputerChoice()
 // console.log(getComputerChoice());
 // console.log(getComputerChoice());
 // console.log(getComputerChoice());
+
+// Function to prompt user's choice
+function getHumanChoice()
+{
+    let strUserChoice = "";
+
+    strUserChoice = prompt("Enter your choice (rock/paper/scissors): ")
+
+    return strUserChoice;
+}
+
+// test getHumanChoice()'s return
+// console.log(getHumanChoice());
+// console.log(getHumanChoice());
+// console.log(getHumanChoice());
+// console.log(getHumanChoice());
+// console.log(getHumanChoice());
