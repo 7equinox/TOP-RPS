@@ -112,7 +112,7 @@ function playRound(strUserChoice, strCompChoice)
     else
     {
         // Capitalize choice
-        const strBothChoice = strUserChoice.charAt(0).toUpperCase + strUserChoice.slice(1);
+        const strBothChoice = strUserChoice.charAt(0).toUpperCase() + strUserChoice.slice(1);
 
         console.log(`Draw! Both choose ${strBothChoice}`);
     }
