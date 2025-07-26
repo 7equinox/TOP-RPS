@@ -59,3 +59,59 @@ function getHumanChoice()
 // console.log(getHumanChoice());
 // console.log(getHumanChoice());
 // console.log(getHumanChoice());
+
+// Function to play a single round of rock-paper-scissors (rps) game
+function playRound(strUserChoice, strCompChoice)
+{
+    // Set user choice to lowercase
+    strUserChoice = strUserChoice.toLowerCase();
+
+    /* Conditions to assess single round of rps game */
+    if (strUserChoice === 'rock' &&
+        strCompChoice === 'paper')
+    {
+        console.log("You lose! Paper beats Rock");
+        intCompScore++;
+    }
+
+    else if (strUserChoice === 'rock' &&
+        strCompChoice === 'scissors')
+    {
+        console.log("You win! Rock beats Scissors");
+        intHumanScore++;
+    }
+
+    else if (strUserChoice === 'paper' &&
+        strCompChoice === 'rock')
+    {
+        console.log("You win! Paper beats Rock");
+        intHumanScore++;
+    }
+
+    else if (strUserChoice === 'paper' &&
+        strCompChoice === 'scissors')
+    {
+        console.log("You lose! Scissors beats Paper");
+        intCompScore++;
+    }
+
+    else if (strUserChoice === 'scissors' &&
+        strCompChoice === 'rock')
+    {
+        console.log("You lose! Rock beats Scissors");
+        intCompScore++;
+    }
+
+    else if (strUserChoice === 'scissors' &&
+        strCompChoice === 'paper')
+    {
+        console.log("You win! Scissors beats Paper");
+        intHumanScore++;
+    }
+}
+
+// Initialize variables to their choices
+const strUserChoice = getHumanChoice();
+const strCompChoice = getComputerChoice();
+
+playRound(strUserChoice, strCompChoice);
