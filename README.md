@@ -34,8 +34,8 @@
 1) create function playGame() and initialize to empty body
 2) call function playGame()
 3) move score variables, user and computer choice variables, and function playRound() to function playGame()
-4) initialize score variables to 0 outside of the loop
-5) initialize variables strUserChoice and strCompChoice to both empty string outside of the loop
+4) initialize score variables to 0
+5) initialize variables strUserChoice and strCompChoice to both empty string
 6) initialize variable strRoundWinner to empty string
 7) create a loop 5 times
 8) inside of the loop, call function getHumanChoice() and getComputerChoice() then set the returned values to variables strUserChoice and strCompChoice respectively.
@@ -44,6 +44,6 @@
 11) inside of the function playRound(), change incrementation of intHumanScore and intCompScore to assigning the variable strRoundWinner to 'user' (if the user wins the round) or 'computer' (if the computer wins the round)
 12) inside of the function playRound(), return variable strRoundWinner
 13) inside of the loop of function playGame(), if strRoundWinner strictly equals to 'user', increment intHumanScore.
-14) otherwise, increment intCompScore.
+14) if strRoundWinner strictly equals to 'computer', increment intCompScore.
 15) after 5 loops, display the final scores of user and computer
 16) also, display the winner at the end.

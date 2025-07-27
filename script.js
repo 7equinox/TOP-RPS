@@ -169,8 +169,8 @@ function playGame()
             intHumanScore++;
         }
 
-        // Otherwise, increment computer's score
-        else
+        // If computer wins the round, increment computer's score
+        else if (strRoundWinner === 'computer')
         {   
             intCompScore++;
         }
@@ -179,7 +179,7 @@ function playGame()
     // Display the final scores
     console.log("[INFO] FINAL SCORES");
     console.log(`[INFO] User: ${intHumanScore}`);
-    console.log(`[INFO] User: ${intCompScore}`);
+    console.log(`[INFO] Computer: ${intCompScore}`);
 
     // If user has higher score than computer, declare user as winner
     if (intHumanScore > intCompScore)
