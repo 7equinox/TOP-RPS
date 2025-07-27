@@ -155,7 +155,7 @@ function playGame()
 
     for (let intRoundsLeft = 5; intRoundsLeft > 0; intRoundsLeft--)
     {
-        console.log(`[INFO] Round: ${intRoundsLeft} left.`)
+        console.log(`[INFO] ${intRoundsLeft} round/s left.`)
 
         // Get the user and computer choice
         strUserChoice = getHumanChoice();
