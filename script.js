@@ -1,8 +1,9 @@
 // console.log("Hello World");
 
 // Initialize global scope scores
-let intHumanScore = 0;
-let intCompScore = 0;
+// let intHumanScore = 0;
+// let intCompScore = 0;
+
 
 // Function to play computer's choice
 function getComputerChoice()
@@ -43,6 +44,7 @@ function getComputerChoice()
 // console.log(getComputerChoice());
 // console.log(getComputerChoice());
 
+
 // Function to prompt user's choice
 function getHumanChoice()
 {
@@ -60,53 +62,57 @@ function getHumanChoice()
 // console.log(getHumanChoice());
 // console.log(getHumanChoice());
 
+
 // Function to play a single round of rock-paper-scissors (rps) game
 function playRound(strUserChoice, strCompChoice)
 {
     // Set user choice to lowercase
     strUserChoice = strUserChoice.toLowerCase();
 
+    // Initialize string round winner to empty
+    let strRoundWinner = "";
+
     /* Conditions to assess single round of rps game */
     if (strUserChoice === 'rock' &&
         strCompChoice === 'paper')
     {
         console.log("You lose! Paper beats Rock");
-        intCompScore++;
+        strRoundWinner = 'computer';
     }
 
     else if (strUserChoice === 'rock' &&
         strCompChoice === 'scissors')
     {
         console.log("You win! Rock beats Scissors");
-        intHumanScore++;
+        strRoundWinner = 'user';
     }
 
     else if (strUserChoice === 'paper' &&
         strCompChoice === 'rock')
     {
         console.log("You win! Paper beats Rock");
-        intHumanScore++;
+        strRoundWinner = 'user';
     }
 
     else if (strUserChoice === 'paper' &&
         strCompChoice === 'scissors')
     {
         console.log("You lose! Scissors beats Paper");
-        intCompScore++;
+        strRoundWinner = 'computer';
     }
 
     else if (strUserChoice === 'scissors' &&
         strCompChoice === 'rock')
     {
         console.log("You lose! Rock beats Scissors");
-        intCompScore++;
+        strRoundWinner = 'computer';
     }
 
     else if (strUserChoice === 'scissors' &&
         strCompChoice === 'paper')
     {
         console.log("You win! Scissors beats Paper");
-        intHumanScore++;
+        strRoundWinner = 'user';
     }
 
     else
@@ -117,10 +123,82 @@ function playRound(strUserChoice, strCompChoice)
 
         console.log(`Draw! Both choose ${strBothChoice}`);
     }
+
+    return strRoundWinner;
 }
 
 // Initialize variables to their choices
-const strUserChoice = getHumanChoice();
-const strCompChoice = getComputerChoice();
+// const strUserChoice = getHumanChoice();
+// const strCompChoice = getComputerChoice();
 
-playRound(strUserChoice, strCompChoice);
+// Start to play a single RPS round
+// playRound(strUserChoice, strCompChoice);
+
+
+// Function to play the entire RPS game 5 times
+function playGame()
+{
+    // Initialize user and computer scores to 0
+    let intHumanScore = 0;
+    let intCompScore = 0;
+
+    // Initialize user and computer choices to empty string
+    let strUserChoice = "";
+    let strCompChoice = "";
+
+    // Start to play a single RPS round
+    // playRound(strUserChoice, strCompChoice);
+
+    // Initialize string round winner to empty
+    let strRoundWinner = "";
+
+    for (let intRoundsLeft = 5; intRoundsLeft > 0; intRoundsLeft--)
+    {
+        console.log(`[INFO] Round: ${intRoundsLeft} left.`)
+
+        // Get the user and computer choice
+        strUserChoice = getHumanChoice();
+        strCompChoice = getComputerChoice();
+
+        // Play a single RPS round and return the winner
+        strRoundWinner = playRound(strUserChoice, strCompChoice);
+
+        // If user wins the round, increment user's score
+        if (strRoundWinner === 'user')
+        {
+            intHumanScore++;
+        }
+
+        // Otherwise, increment computer's score
+        else
+        {   
+            intCompScore++;
+        }
+    }
+
+    // Display the final scores
+    console.log("[INFO] FINAL SCORES");
+    console.log(`[INFO] User: ${intHumanScore}`);
+    console.log(`[INFO] User: ${intCompScore}`);
+
+    // If user has higher score than computer, declare user as winner
+    if (intHumanScore > intCompScore)
+    {
+        console.log("User is the winner of Rock-Paper-Scissors Game. Congrats!");
+    }
+
+    // If computer has higher score, declare computer as winner
+    else if (intHumanScore < intCompScore)
+    {
+        console.log("Computer is the winner of Rock-Paper-Scissors Game. Better luck next time!");
+    }
+
+    // Otherwise, declare tie
+    else
+    {
+        console.log("Tie. What a game!")
+    }
+}
+
+// Start the RPS game
+playGame();
