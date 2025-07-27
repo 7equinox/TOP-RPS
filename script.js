@@ -122,6 +122,7 @@ function playRound(strUserChoice, strCompChoice)
                             + strUserChoice.slice(1);
 
         console.log(`Draw! Both choose ${strBothChoice}`);
+        strRoundWinner = '';
     }
 
     return strRoundWinner;
