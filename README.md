@@ -29,3 +29,21 @@
 8) else if user picks scissors and computer picks rock, display "You lose! Rock beats Scissors" and increment intCompScore.
 9) else if user picks scissors and computer picks paper, display "You win! Scissors beats Paper" and increment intHumanScore.
 10) otherwise draw, display `Draw! Both choose ${Rock/Paper/Scissors}`.
+
+## Write the logic to play the entire game
+1) create function playGame() and initialize to empty body
+2) call function playGame()
+3) move score variables, user and computer choice variables, and function playRound() to function playGame()
+4) initialize score variables to 0 outside of the loop
+5) initialize variables strUserChoice and strCompChoice to both empty string outside of the loop
+6) initialize variable strRoundWinner to empty string
+7) create a loop 5 times
+8) inside of the loop, call function getHumanChoice() and getComputerChoice() then set the returned values to variables strUserChoice and strCompChoice respectively.
+9) inside also of the loop, call function playRound() and set the returned value to strRoundWinner
+10) inside of the function playRound(), initialize a new variable strRoundWinner to empty string before assessing the round of the gmae
+11) inside of the function playRound(), change incrementation of intHumanScore and intCompScore to assigning the variable strRoundWinner to 'user' (if the user wins the round) or 'computer' (if the computer wins the round)
+12) inside of the function playRound(), return variable strRoundWinner
+13) inside of the loop of function playGame(), if strRoundWinner strictly equals to 'user', increment intHumanScore.
+14) otherwise, increment intCompScore.
+15) after 5 loops, display the final scores of user and computer
+16) also, display the winner at the end.
