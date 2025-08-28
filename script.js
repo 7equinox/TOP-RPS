@@ -7,7 +7,9 @@
 const btnHumanChoices = document.querySelectorAll("button");
 
 btnHumanChoices.forEach((btnChoice) => {
-    console.log(btnChoice.textContent);
+    btnChoice.addEventListener("click", () => {
+        console.log(btnChoice.textContent);
+    });
 });
 
 // Function to play computer's choice
