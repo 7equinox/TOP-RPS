@@ -4,8 +4,10 @@
 // let intHumanScore = 0;
 // let intCompScore = 0;
 
+// Select all buttons from Human RPS Selection
 const btnHumanChoices = document.querySelectorAll("button");
 
+// Iterate each button to listen what user choose
 btnHumanChoices.forEach((btnChoice) => {
     btnChoice.addEventListener("click", () => {
         console.log(btnChoice.textContent);
