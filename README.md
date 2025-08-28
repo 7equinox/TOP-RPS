@@ -1,44 +1,61 @@
-# TOP-RPS (Revisit)
+# TOP-RPS Pseudocode (Revisit)
 
-## Write the logic to play the entire game (Enhance)
-1) call function [playGame()](#write-the-logic-to-play-the-entire-game-enhance)
-2) initialize variables humanScore and computerScore to both 0
-3) initialize variables strUserChoice and strCompChoice to both empty string
-4) initialize variable strRoundWinner to empty string
-5) create a loop which the condition must stop if either the user or the computer reaches 5 points
-6) inside of the loop, call function [getHumanChoice()](#write-the-logic-to-get-the-human-choice-enhance) and [getComputerChoice()](#write-the-logic-to-get-the-computer-choice) then set the returned values to variables strUserChoice and strCompChoice respectively
-7) inside also of the loop, call function [playRound(strUserChoice, strCompChoice)](#write-the-logic-to-play-a-single-round) and set the returned value to strRoundWinner
-9) inside of the loop, increment the intHumanScore or intCompScore if the variable strRoundWinner is set to 'user' (if the user wins the round) or 'computer' (if the computer wins the round)
-10) after the game, display the final scores of user and computer
-11) if intHumanScore > intCompScore, display the user as the winner at the end; eitherwise the computer.
+## Logic to play Rock Paper Scissors - UI version
+1) initialize global variables gIntHumanScore and gIntCompScore to both 0
+2) initialize global variable gStrUserChoice to empty string
+3) initialize global variable gBtnHumanChoices to return a node list of three buttons (rock, paper, & scissors)
+4) call function [displayRpsScore()](#logic-to-display-the-running-score)
+5) for each button listen to what user clicks
+6) inside foreach, if either the user or the computer reaches 5 points, remove event listener for each button
+7) else if a user clicks a button, set the textContent of it to global variable gStrUserChoice as user's input
+8) then call function [playRound()](#logic-to-play-a-single-round-enhance)
+9) outside event listener, if either the user or the computer reaches 5 points, call function [displayGameWinner()](#logic-to-display-the-winner-once-a-player-reaches-5-points)
 
-## Write the logic to get the human choice (Enhance)
-1) call function getHumanChoice()
-2) initialize variable strUserChoice to empty string
-3) initialize variable btnHumanChoices to return a node list of three buttons (rock, paper, & scissors)
-4) create a loop which the condition must stop if the user click either of those three buttons
-4) inside the loop, for each button listen to what user clicks
-5) if a user clicks a button, set the textContent of it to variable strUserChoice as user's input and break that loop
-6) return strUserChoice
+## Logic to display the running score
+for function displayRpsScore():
+1) *display `User ${gIntHumanScore} | ${gIntCompScore} Computer`
 
-## Write the logic to get the computer choice
-1) call function getComputerChoice()
-2) initialize variable strCompChoice to empty string
-3) create variable fltRndmNum and set to a random number between 0 & 1 inclusively, multiply by 100
-4) if fltRndNum is less than or equal to 33.33, set strCompChoice to "rock"
-5) else if fltRndNum is less than or equal to 66.67, set strCompChoice to "paper"
-6) otherwise, set strCompChoice to "scissors"
-7) return strCompChoice
+## Logic to play a single round (Enhance)
+for function playRound():
+1) initialize variable strCompChoice to returned value of function call [getComputerChoice()](#logic-to-get-the-computer-choice)
+2) initialize variable strRoundWinner to returned value of function call [getRoundResult(strCompChoice)](#logic-to-get-the-result-of-a-single-round)
+3) call function [displayRoundResult(strRoundWinner, strCompChoice)](#logic-to-display-the-result-of-a-single-round-enhance)
+4) call function [incrementPlayerScore(strRoundWinner)](#logic-to-increment-player-score-after-a-round)
+5) call function [displayRpsScore()](#logic-to-display-the-running-score)
 
-## Write the logic to play a single round
-1) call function playRound() with two arguments: strUserChoice and strCompChoice
-2) set strUserChoice to lowercase
-3) initialize variable strRoundWinner to empty string
-3) if user picks rock and computer picks paper, display "You lose! Paper beats Rock" and set strRoundWinner to "computer"
-4) else if user picks rock and computer picks scissors, display "You win! Rock beats Scissors" and set strRoundWinner to "user"
-5) else if user picks paper and computer picks rock, display "You win! Paper beats Rock" and set strRoundWinner to "user"
-6) else if user picks paper and computer picks scissors, display "You lose! Scissors beats paper" and set strRoundWinner to "computer"
-7) else if user picks scissors and computer picks rock, display "You lose! Rock beats Scissors" and set strRoundWinner to "computer"
-8) else if user picks scissors and computer picks paper, display "You win! Scissors beats Paper" and set strRoundWinner to "user"
-9) otherwise draw, display `Draw! Both choose ${Rock/Paper/Scissors}`
-10) return strRoundWinner
+## Logic to get the computer choice
+for function getComputerChoice():
+1) initialize variable strCompChoice to empty string
+2) create variable fltRndmNum and set to a random number between 0 & 1 inclusively, multiply by 100
+3) if fltRndNum is less than or equal to 33.33, set strCompChoice to "Rock"
+4) else if fltRndNum is less than or equal to 66.67, set strCompChoice to "Paper"
+5) otherwise, set strCompChoice to "Scissors"
+6) return strCompChoice
+
+## Logic to get the result of a single round (Enhance)
+for getRoundResult(strCompChoice):
+1) if user picks rock and computer picks paper, return string "computer"
+2) else if user picks rock and computer picks scissors, return string "user"
+3) else if user picks paper and computer picks rock, return string "user"
+4) else if user picks paper and computer picks scissors, return string "computer"
+5) else if user picks scissors and computer picks rock, return string "computer"
+6) else if user picks scissors and computer picks paper, return string "user"
+7) otherwise return string "draw"
+
+## Logic to display the result of a single round (Enhance)
+for function displayRoundResult(strRoundWinner, strCompChoice):
+1) if strRoundWinner equals "draw", *display `Draw! Both choose ${gStrUserChoice}`
+2) else if strRoundWinner equals "user", *display `You win! ${gStrUserChoice} beats ${strCompChoice}`
+3) otherwise, *display `You lose! ${strCompChoice} beats ${gStrUserChoice}`
+
+## Logic to increment player score after a round
+for function incrementPlayerScore(strRoundWinner):
+1) if the variable strRoundWinner is set to 'user', increment gIntHumanScore
+2) otherwise, increment gIntCompScore
+
+## Logic to display the winner once a player reaches 5 points
+for function displayGameWinner():
+1) if gIntHumanScore > gIntCompScore, *display the user as the winner at the end
+2) otherwise, *display the computer as the winner at the end
+
+##### NOTE: *display means doing it from JS DOM Manipulation to HTML
