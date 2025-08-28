@@ -4,6 +4,11 @@
 // let intHumanScore = 0;
 // let intCompScore = 0;
 
+const btnHumanChoices = document.querySelectorAll("button");
+
+btnHumanChoices.forEach((btnChoice) => {
+    console.log(btnChoice.textContent);
+});
 
 // Function to play computer's choice
 function getComputerChoice()
