@@ -153,29 +153,29 @@ function playGame()
     // Initialize string round winner to empty
     let strRoundWinner = "";
 
-    for (let intRoundsLeft = 5; intRoundsLeft > 0; intRoundsLeft--)
-    {
-        console.log(`[INFO] ${intRoundsLeft} round/s left.`)
+    // for (let intRoundsLeft = 5; intRoundsLeft > 0; intRoundsLeft--)
+    // {
+    //     console.log(`[INFO] ${intRoundsLeft} round/s left.`)
 
-        // Get the user and computer choice
-        strUserChoice = getHumanChoice();
-        strCompChoice = getComputerChoice();
+    //     // Get the user and computer choice
+    //     strUserChoice = getHumanChoice();
+    //     strCompChoice = getComputerChoice();
 
-        // Play a single RPS round and return the winner
-        strRoundWinner = playRound(strUserChoice, strCompChoice);
+    //     // Play a single RPS round and return the winner
+    //     strRoundWinner = playRound(strUserChoice, strCompChoice);
 
-        // If user wins the round, increment user's score
-        if (strRoundWinner === 'user')
-        {
-            intHumanScore++;
-        }
+    //     // If user wins the round, increment user's score
+    //     if (strRoundWinner === 'user')
+    //     {
+    //         intHumanScore++;
+    //     }
 
-        // If computer wins the round, increment computer's score
-        else if (strRoundWinner === 'computer')
-        {   
-            intCompScore++;
-        }
-    }
+    //     // If computer wins the round, increment computer's score
+    //     else if (strRoundWinner === 'computer')
+    //     {   
+    //         intCompScore++;
+    //     }
+    // }
 
     // Display the final scores
     console.log("[INFO] FINAL SCORES");
