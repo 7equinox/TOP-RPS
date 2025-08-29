@@ -5,9 +5,25 @@ let gIntCompScore = 0;
 // Function to display the running score
 function displayRpsScore()
 {
-    // TODO: Create logic to manipulate DOM for HTML
-
     console.log(`[DISPLAY] User ${gIntHumanScore} | ${gIntCompScore} Computer`);
+
+    // Dynamically update HTML text content of running score
+    const divDsplyRnnngScr = document.querySelector('#strDsplyRnnngScr');
+
+    let pDisplayScore = divDsplyRnnngScr.querySelector('p');
+
+    if(!pDisplayScore)
+    {
+        pDisplayScore = document.createElement('p');
+
+        pDisplayScore.textContent = `User ${gIntHumanScore} | ${gIntCompScore} Computer`;
+
+        divDsplyRnnngScr.appendChild(pDisplayScore);
+    }
+    else
+    {
+        pDisplayScore.textContent = `User ${gIntHumanScore} | ${gIntCompScore} Computer`;
+    }
 }
 
 // Display initial scores of both players
@@ -121,8 +137,8 @@ gBtnHumanChoices.forEach((btnChoice) => {
         if (gIntHumanScore >= 5 || gIntCompScore >= 5)
         {
             gBtnHumanChoices.forEach((btnChoice) => {
-                btnChoice.removeEventListener("click", handleHumanChoice);
-                btnChoice.setAttribute("disabled", "true");
+                btnChoice.removeEventListener('click', handleHumanChoice);
+                btnChoice.setAttribute('disabled', 'true');
             });
 
             displayGameWinner();
@@ -138,7 +154,7 @@ gBtnHumanChoices.forEach((btnChoice) => {
         checkGameOver();
     }
 
-    btnChoice.addEventListener("click", handleHumanChoice);
+    btnChoice.addEventListener('click', handleHumanChoice);
 
     checkGameOver();
 });
