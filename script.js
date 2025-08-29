@@ -5,7 +5,7 @@ let gIntCompScore = 0;
 // Function to display the running score
 function displayRpsScore()
 {
-    const strPlayerScores = `User ${gIntHumanScore} | ${gIntCompScore} Computer`;
+    const strPlayerScores = `SCORE: User ${gIntHumanScore} | ${gIntCompScore} Computer`;
 
     // Dynamically update div text content of running score
     const divDsplyRnnngScr = document.querySelector('#strDsplyRnnngScr');
@@ -27,20 +27,32 @@ function displayGameWinner()
 
     // Modify div text content of winner of RPS game
     const divDsplyWnnr = document.querySelector('#strDsplyWnnr');
-    divDsplyWnnr.textContent = strPlayerWins;
+    divDsplyWnnr.textContent = `ENDGAME: ${strPlayerWins}`;
     
-    console.log(`[DISPLAY] ${strPlayerWins}`);
+    console.log(`[DISPLAY] ENDGAME: ${strPlayerWins}`);
 }
 
 // Function to play computer's choice
 function getComputerChoice()
 {
+    let strCompChoice = '';
+
     // Create random number for the condition/s below
     const fltRndmNum = Math.random() * 100;
 
-    if (fltRndmNum <= 33.33) return 'Rock';
-    if (fltRndmNum <= 66.67) return 'Paper';
-    return 'Scissors';
+    if (fltRndmNum <= 33.33) strCompChoice = 'Rock';
+    else if (fltRndmNum <= 66.67) strCompChoice = 'Paper';
+    else strCompChoice = 'Scissors';
+
+    const strDsplyCompChc = `Computer picks "${strCompChoice}."`;
+
+    // Dynamically update h3 text content of computer choice
+    const headerCompChc = document.querySelector('#strBothChoices');
+    headerCompChc.textContent += strDsplyCompChc;
+
+    console.log(`[DISPLAY] ${strDsplyCompChc}`);
+
+    return strCompChoice;
 }
 
 // Function to get the result of a single RPS round
@@ -77,18 +89,18 @@ function getRoundResult(strUserChoice, strCompChoice)
 // Function to display the result of a single RPS round
 function displayRoundResult(strRoundWinner, strUserChoice, strCompChoice)
 {
-    let strRoundResult = '';
+    let strRoundResult = "RESULTS: ";
     if (strRoundWinner === 'draw')
     {
-        strRoundResult = `Draw! Both choose ${strUserChoice}`;
+        strRoundResult += `Draw! Both choose ${strUserChoice}.`;
     }
     else if (strRoundWinner === 'user')
     {
-        strRoundResult = `You win! ${strUserChoice} beats ${strCompChoice}`;
+        strRoundResult += `You win! ${strUserChoice} beats ${strCompChoice}.`;
     }
     else
     {
-        strRoundResult = `You lose! ${strCompChoice} beats ${strUserChoice}`;
+        strRoundResult += `You lose! ${strCompChoice} beats ${strUserChoice}.`;
     }
 
     // Dynamically update div text content of round result
@@ -140,7 +152,14 @@ gBtnHumanChoices.forEach((btnChoice) => {
     function handleHumanChoice()
     {
         const strUserChoice = btnChoice.textContent;
-        console.log(`[CONSOLE] You pick "${strUserChoice}"`);
+        const strDsplyUsrChc = `You pick "${strUserChoice}." `;
+
+        // Dynamically update h3 text content of user choice
+        const headerUsrChc = document.querySelector('#strBothChoices');
+        headerUsrChc.textContent = strDsplyUsrChc;
+
+        console.log(`[DISPLAY] ${strDsplyUsrChc}`);
+
         playRound(strUserChoice);
         checkGameOver();
     }
