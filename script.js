@@ -20,17 +20,13 @@ displayRpsScore();
 // Function to display the winner once a player reaches 5 points
 function displayGameWinner()
 {
+    const strPlayerWins =
+        (gIntHumanScore === 5)?
+            "User is the winner of Rock-Paper-Scissors Game. Congrats!":
+            "Computer is the winner of Rock-Paper-Scissors Game. Better luck next time!";
+
     // Modify div text content of winner of RPS game
     const divDsplyWnnr = document.querySelector('#strDsplyWnnr');
-    let strPlayerWins = '';
-    if (gIntHumanScore === 5)
-    {
-        strPlayerWins = "User is the winner of Rock-Paper-Scissors Game. Congrats!";
-    }
-    else
-    {
-        strPlayerWins = "Computer is the winner of Rock-Paper-Scissors Game. Better luck next time!";
-    }
     divDsplyWnnr.textContent = strPlayerWins;
     
     console.log(`[DISPLAY] ${strPlayerWins}`);
@@ -81,22 +77,26 @@ function getRoundResult(strUserChoice, strCompChoice)
 // Function to display the result of a single RPS round
 function displayRoundResult(strRoundWinner, strUserChoice, strCompChoice)
 {
-    // TODO: Create logic to manipulate DOM for HTML
-    
+    // Dynamically update div text content of round result
+    let strRoundResult = '';
     if (strRoundWinner === 'draw')
     {
-        console.log(`[DISPLAY] Draw! Both choose ${strUserChoice}`);
+        strRoundResult = `Draw! Both choose ${strUserChoice}`;
     }
-
     else if (strRoundWinner === 'user')
     {
-        console.log(`[DISPLAY] You win! ${strUserChoice} beats ${strCompChoice}`);
+        strRoundResult = `You win! ${strUserChoice} beats ${strCompChoice}`;
     }
-
     else
     {
-        console.log(`[DISPLAY] You lose! ${strCompChoice} beats ${strUserChoice}`);
+        strRoundResult = `You lose! ${strCompChoice} beats ${strUserChoice}`;
     }
+
+    // Modify div text content of winner of RPS game
+    const divDsplyRsltRnd = document.querySelector('#strDsplyRsltRnd');
+    divDsplyRsltRnd.textContent = strRoundResult;
+
+    console.log(`[DISPLAY] ${strRoundResult}`);
 }
 
 // Function to increment winner score
