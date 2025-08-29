@@ -1,18 +1,50 @@
 // console.log("Hello World");
 
 // Initialize global scope scores
-// let intHumanScore = 0;
-// let intCompScore = 0;
+let gIntHumanScore = 5;
+let gIntCompScore = 0;
+
+// Initialize global scope user choice
+let gStrUserChoice = "";
 
 // Select all buttons from Human RPS Selection
 const btnHumanChoices = document.querySelectorAll("button");
+// console.log(btnHumanChoices);
+
+// Display scores of both players (0:0)
+displayRpsScore();
 
 // Iterate each button to listen what user choose
 btnHumanChoices.forEach((btnChoice) => {
-    btnChoice.addEventListener("click", () => {
+
+    function disableHumanChoice()
+    {
+        btnHumanChoices.forEach((btnChoice) => {
+            btnChoice.removeEventListener("click", getHumanChoice);
+            btnChoice.setAttribute("disabled", "true");
+        });
+    }
+
+    function getHumanChoice()
+    {
         console.log(btnChoice.textContent);
-    });
+
+        if (gIntHumanScore === 5 || gIntCompScore === 5)
+        {
+            disableHumanChoice();
+        }
+    }
+
+    btnChoice.addEventListener("click", getHumanChoice);
 });
+
+// Function to display the running score
+function displayRpsScore()
+{
+    console.log(`User ${gIntHumanScore} | ${gIntCompScore} Computer`);
+
+    // TODO: Create logic to manipulate DOM for HTML
+}
 
 // Function to play computer's choice
 function getComputerChoice()
@@ -153,7 +185,7 @@ function playGame()
     let intCompScore = 0;
 
     // Initialize user and computer choices to empty string
-    let strUserChoice = "";
+    // let strUserChoice = "";
     let strCompChoice = "";
 
     // Start to play a single RPS round
@@ -187,27 +219,27 @@ function playGame()
     // }
 
     // Display the final scores
-    console.log("[INFO] FINAL SCORES");
-    console.log(`[INFO] User: ${intHumanScore}`);
-    console.log(`[INFO] Computer: ${intCompScore}`);
+    // console.log("[INFO] FINAL SCORES");
+    // console.log(`[INFO] User: ${intHumanScore}`);
+    // console.log(`[INFO] Computer: ${intCompScore}`);
 
-    // If user has higher score than computer, declare user as winner
-    if (intHumanScore > intCompScore)
-    {
-        console.log("User is the winner of Rock-Paper-Scissors Game. Congrats!");
-    }
+    // // If user has higher score than computer, declare user as winner
+    // if (intHumanScore > intCompScore)
+    // {
+    //     console.log("User is the winner of Rock-Paper-Scissors Game. Congrats!");
+    // }
 
-    // If computer has higher score, declare computer as winner
-    else if (intHumanScore < intCompScore)
-    {
-        console.log("Computer is the winner of Rock-Paper-Scissors Game. Better luck next time!");
-    }
+    // // If computer has higher score, declare computer as winner
+    // else if (intHumanScore < intCompScore)
+    // {
+    //     console.log("Computer is the winner of Rock-Paper-Scissors Game. Better luck next time!");
+    // }
 
-    // Otherwise, declare tie
-    else
-    {
-        console.log("Tie. What a game!")
-    }
+    // // Otherwise, declare tie
+    // else
+    // {
+    //     console.log("Tie. What a game!")
+    // }
 }
 
 // Start the RPS game
