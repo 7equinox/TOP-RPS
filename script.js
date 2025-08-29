@@ -1,90 +1,147 @@
-// console.log("Hello World");
-
 // Initialize global scope scores
-let gIntHumanScore = 5;
+let gIntHumanScore = 0;
 let gIntCompScore = 0;
-
-// Initialize global scope user choice
-let gStrUserChoice = "";
-
-// Select all buttons from Human RPS Selection
-const btnHumanChoices = document.querySelectorAll("button");
-// console.log(btnHumanChoices);
-
-// Display scores of both players (0:0)
-displayRpsScore();
-
-// Iterate each button to listen what user choose
-btnHumanChoices.forEach((btnChoice) => {
-
-    function disableHumanChoice()
-    {
-        btnHumanChoices.forEach((btnChoice) => {
-            btnChoice.removeEventListener("click", getHumanChoice);
-            btnChoice.setAttribute("disabled", "true");
-        });
-    }
-
-    function getHumanChoice()
-    {
-        console.log(btnChoice.textContent);
-
-        if (gIntHumanScore === 5 || gIntCompScore === 5)
-        {
-            disableHumanChoice();
-        }
-    }
-
-    btnChoice.addEventListener("click", getHumanChoice);
-});
 
 // Function to display the running score
 function displayRpsScore()
 {
-    console.log(`User ${gIntHumanScore} | ${gIntCompScore} Computer`);
-
     // TODO: Create logic to manipulate DOM for HTML
+
+    console.log(`[DISPLAY] User ${gIntHumanScore} | ${gIntCompScore} Computer`);
+}
+
+// Display initial scores of both players
+displayRpsScore();
+
+// Select all buttons from Human RPS Selection
+const btnHumanChoices = document.querySelectorAll('button');
+
+// Function to display the winner once a player reaches 5 points
+function displayGameWinner()
+{
+    // TODO: Create logic to manipulate DOM for HTML
+
+    if (gIntHumanScore === 5)
+    {
+        console.log("[DISPLAY] User is the winner of Rock-Paper-Scissors Game. Congrats!");
+    }
+    else
+    {
+        console.log("[DISPLAY] Computer is the winner of Rock-Paper-Scissors Game. Better luck next time!");
+    }  
 }
 
 // Function to play computer's choice
 function getComputerChoice()
 {
-    let strCompChoice = "";
-
     // Create random number for the condition/s below
     const fltRndmNum = Math.random() * 100;
 
-    // Check the float number for testing the function
-    // console.log(fltRndmNum);
-
-    // if between 0 to 33.33, play "rock"
-    if (fltRndmNum <= 33.33)
-    {
-        strCompChoice = "rock";
-    }
-
-    // if between 33.34 to 66.67, play "paper"
-    else if (fltRndmNum <= 66.67)
-    {
-        strCompChoice = "paper";
-    }
-
-    // if between 66.68 to 100, play "scissors"
-    else
-    {
-        strCompChoice = "scissors";
-    }
-
-    return strCompChoice;
+    if (fltRndmNum <= 33.33) return 'Rock';
+    if (fltRndmNum <= 66.67) return 'Paper';
+    return 'Scissors';
 }
 
-// test getComputerChoice()'s return
-// console.log(getComputerChoice());
-// console.log(getComputerChoice());
-// console.log(getComputerChoice());
-// console.log(getComputerChoice());
-// console.log(getComputerChoice());
+// Function to get the result of a single RPS round
+function getRoundResult(strUserChoice, strCompChoice)
+{
+    if (strUserChoice === 'Rock' &&
+        strCompChoice === 'Paper')
+        return 'computer';
 
+    if (strUserChoice === 'Rock' &&
+        strCompChoice === 'Scissors')
+        return 'user';
+
+    if (strUserChoice === 'Paper' &&
+        strCompChoice === 'Rock')
+        return 'user';
+
+    if (strUserChoice === 'Paper' &&
+        strCompChoice === 'Scissors')
+        return 'computer';
+
+    if (strUserChoice === 'Scissors' &&
+        strCompChoice === 'Rock')
+        return 'computer';
+
+    if (strUserChoice === 'Scissors' &&
+        strCompChoice === 'Paper')
+        return 'user';
+
+    // if both players choose same pick
+    return 'draw';
+}
+
+// Function to display the result of a single RPS round
+function displayRoundResult(strRoundWinner, strUserChoice, strCompChoice)
+{
+    // TODO: Create logic to manipulate DOM for HTML
+    
+    if (strRoundWinner === 'draw')
+    {
+        console.log(`[DISPLAY] Draw! Both choose ${strUserChoice}`);
+    }
+
+    else if (strRoundWinner === 'user')
+    {
+        console.log(`[DISPLAY] You win! ${strUserChoice} beats ${strCompChoice}`);
+    }
+
+    else
+    {
+        console.log(`[DISPLAY] You lose! ${strCompChoice} beats ${strUserChoice}`);
+    }
+}
+
+// Function to increment winner score
+function incrementPlayerScore(strRoundWinner)
+{
+    (strRoundWinner === 'user')?
+        gIntHumanScore++:
+        gIntCompScore++;
+}
+
+// Function to play the single RPS round
+function playRound(strUserChoice)
+{
+    const strCompChoice = getComputerChoice();
+    const strRoundWinner = getRoundResult(strUserChoice, strCompChoice);
+    displayRoundResult(strRoundWinner, strUserChoice, strCompChoice);
+    if (strRoundWinner !== 'draw') incrementPlayerScore(strRoundWinner);
+    displayRpsScore();
+}
+
+// Iterate each button to listen what user choose
+btnHumanChoices.forEach((btnChoice) => {
+    // Disable buttons if the game is not active
+    function checkGameOver()
+    {
+        // Game is active only if BOTH scores are less than 5
+        if (gIntHumanScore >= 5 || gIntCompScore >= 5)
+        {
+            btnHumanChoices.forEach((btnChoice) => {
+                btnChoice.removeEventListener("click", handleHumanChoice);
+                btnChoice.setAttribute("disabled", "true");
+            });
+
+            displayGameWinner();
+        }
+    }
+
+    // Function to get the human choice and play single round
+    function handleHumanChoice()
+    {
+        const strUserChoice = btnChoice.textContent;
+        console.log(`[CONSOLE] You pick "${strUserChoice}"`);
+        playRound(strUserChoice);
+        checkGameOver();
+    }
+
+    btnChoice.addEventListener("click", handleHumanChoice);
+
+    checkGameOver();
+});
 
 // Function to prompt user's choice
 function getHumanChoice()
@@ -95,152 +152,3 @@ function getHumanChoice()
 
     return strUserChoice;
 }
-
-// test getHumanChoice()'s return
-// console.log(getHumanChoice());
-// console.log(getHumanChoice());
-// console.log(getHumanChoice());
-// console.log(getHumanChoice());
-// console.log(getHumanChoice());
-
-
-// Function to play a single round of rock-paper-scissors (rps) game
-function playRound(strUserChoice, strCompChoice)
-{
-    // Set user choice to lowercase
-    strUserChoice = strUserChoice.toLowerCase();
-
-    // Initialize string round winner to empty
-    let strRoundWinner = "";
-
-    /* Conditions to assess single round of rps game */
-    if (strUserChoice === 'rock' &&
-        strCompChoice === 'paper')
-    {
-        console.log("You lose! Paper beats Rock");
-        strRoundWinner = 'computer';
-    }
-
-    else if (strUserChoice === 'rock' &&
-        strCompChoice === 'scissors')
-    {
-        console.log("You win! Rock beats Scissors");
-        strRoundWinner = 'user';
-    }
-
-    else if (strUserChoice === 'paper' &&
-        strCompChoice === 'rock')
-    {
-        console.log("You win! Paper beats Rock");
-        strRoundWinner = 'user';
-    }
-
-    else if (strUserChoice === 'paper' &&
-        strCompChoice === 'scissors')
-    {
-        console.log("You lose! Scissors beats Paper");
-        strRoundWinner = 'computer';
-    }
-
-    else if (strUserChoice === 'scissors' &&
-        strCompChoice === 'rock')
-    {
-        console.log("You lose! Rock beats Scissors");
-        strRoundWinner = 'computer';
-    }
-
-    else if (strUserChoice === 'scissors' &&
-        strCompChoice === 'paper')
-    {
-        console.log("You win! Scissors beats Paper");
-        strRoundWinner = 'user';
-    }
-
-    else
-    {
-        // Capitalize choice
-        const strBothChoice = strUserChoice.charAt(0).toUpperCase() 
-                            + strUserChoice.slice(1);
-
-        console.log(`Draw! Both choose ${strBothChoice}`);
-        strRoundWinner = '';
-    }
-
-    return strRoundWinner;
-}
-
-// Initialize variables to their choices
-// const strUserChoice = getHumanChoice();
-// const strCompChoice = getComputerChoice();
-
-// Start to play a single RPS round
-// playRound(strUserChoice, strCompChoice);
-
-
-// Function to play the entire RPS game 5 times
-function playGame()
-{
-    // Initialize user and computer scores to 0
-    let intHumanScore = 0;
-    let intCompScore = 0;
-
-    // Initialize user and computer choices to empty string
-    // let strUserChoice = "";
-    let strCompChoice = "";
-
-    // Start to play a single RPS round
-    // playRound(strUserChoice, strCompChoice);
-
-    // Initialize string round winner to empty
-    let strRoundWinner = "";
-
-    // for (let intRoundsLeft = 5; intRoundsLeft > 0; intRoundsLeft--)
-    // {
-    //     console.log(`[INFO] ${intRoundsLeft} round/s left.`)
-
-    //     // Get the user and computer choice
-    //     strUserChoice = getHumanChoice();
-    //     strCompChoice = getComputerChoice();
-
-    //     // Play a single RPS round and return the winner
-    //     strRoundWinner = playRound(strUserChoice, strCompChoice);
-
-    //     // If user wins the round, increment user's score
-    //     if (strRoundWinner === 'user')
-    //     {
-    //         intHumanScore++;
-    //     }
-
-    //     // If computer wins the round, increment computer's score
-    //     else if (strRoundWinner === 'computer')
-    //     {   
-    //         intCompScore++;
-    //     }
-    // }
-
-    // Display the final scores
-    // console.log("[INFO] FINAL SCORES");
-    // console.log(`[INFO] User: ${intHumanScore}`);
-    // console.log(`[INFO] Computer: ${intCompScore}`);
-
-    // // If user has higher score than computer, declare user as winner
-    // if (intHumanScore > intCompScore)
-    // {
-    //     console.log("User is the winner of Rock-Paper-Scissors Game. Congrats!");
-    // }
-
-    // // If computer has higher score, declare computer as winner
-    // else if (intHumanScore < intCompScore)
-    // {
-    //     console.log("Computer is the winner of Rock-Paper-Scissors Game. Better luck next time!");
-    // }
-
-    // // Otherwise, declare tie
-    // else
-    // {
-    //     console.log("Tie. What a game!")
-    // }
-}
-
-// Start the RPS game
-playGame();
