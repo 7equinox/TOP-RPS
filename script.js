@@ -13,9 +13,6 @@ function displayRpsScore()
 // Display initial scores of both players
 displayRpsScore();
 
-// Select all buttons from Human RPS Selection
-const btnHumanChoices = document.querySelectorAll('button');
-
 // Function to display the winner once a player reaches 5 points
 function displayGameWinner()
 {
@@ -112,15 +109,18 @@ function playRound(strUserChoice)
     displayRpsScore();
 }
 
+// Select all buttons from Human RPS Selection
+const gBtnHumanChoices = document.querySelectorAll('button');
+
 // Iterate each button to listen what user choose
-btnHumanChoices.forEach((btnChoice) => {
-    // Disable buttons if the game is not active
+gBtnHumanChoices.forEach((btnChoice) => {
+    // Disable buttons and announce winner if the game is not active
     function checkGameOver()
     {
         // Game is active only if BOTH scores are less than 5
         if (gIntHumanScore >= 5 || gIntCompScore >= 5)
         {
-            btnHumanChoices.forEach((btnChoice) => {
+            gBtnHumanChoices.forEach((btnChoice) => {
                 btnChoice.removeEventListener("click", handleHumanChoice);
                 btnChoice.setAttribute("disabled", "true");
             });
@@ -142,13 +142,3 @@ btnHumanChoices.forEach((btnChoice) => {
 
     checkGameOver();
 });
-
-// Function to prompt user's choice
-function getHumanChoice()
-{
-    let strUserChoice = "";
-
-    strUserChoice = prompt("Enter your choice (rock/paper/scissors): ")
-
-    return strUserChoice;
-}
