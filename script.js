@@ -77,7 +77,6 @@ function getRoundResult(strUserChoice, strCompChoice)
 // Function to display the result of a single RPS round
 function displayRoundResult(strRoundWinner, strUserChoice, strCompChoice)
 {
-    // Dynamically update div text content of round result
     let strRoundResult = '';
     if (strRoundWinner === 'draw')
     {
@@ -92,7 +91,7 @@ function displayRoundResult(strRoundWinner, strUserChoice, strCompChoice)
         strRoundResult = `You lose! ${strCompChoice} beats ${strUserChoice}`;
     }
 
-    // Modify div text content of winner of RPS game
+    // Dynamically update div text content of round result
     const divDsplyRsltRnd = document.querySelector('#strDsplyRsltRnd');
     divDsplyRsltRnd.textContent = strRoundResult;
 
