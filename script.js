@@ -5,25 +5,13 @@ let gIntCompScore = 0;
 // Function to display the running score
 function displayRpsScore()
 {
-    console.log(`[DISPLAY] User ${gIntHumanScore} | ${gIntCompScore} Computer`);
+    const strPlayerScores = `User ${gIntHumanScore} | ${gIntCompScore} Computer`;
 
-    // Dynamically update HTML text content of running score
+    // Dynamically update div text content of running score
     const divDsplyRnnngScr = document.querySelector('#strDsplyRnnngScr');
+    divDsplyRnnngScr.textContent = strPlayerScores;
 
-    let pDisplayScore = divDsplyRnnngScr.querySelector('p');
-
-    if(!pDisplayScore)
-    {
-        pDisplayScore = document.createElement('p');
-
-        pDisplayScore.textContent = `User ${gIntHumanScore} | ${gIntCompScore} Computer`;
-
-        divDsplyRnnngScr.appendChild(pDisplayScore);
-    }
-    else
-    {
-        pDisplayScore.textContent = `User ${gIntHumanScore} | ${gIntCompScore} Computer`;
-    }
+    console.log(`[DISPLAY] ${strPlayerScores}`);
 }
 
 // Display initial scores of both players
@@ -32,16 +20,20 @@ displayRpsScore();
 // Function to display the winner once a player reaches 5 points
 function displayGameWinner()
 {
-    // TODO: Create logic to manipulate DOM for HTML
-
+    // Modify div text content of winner of RPS game
+    const divDsplyWnnr = document.querySelector('#strDsplyWnnr');
+    let strPlayerWins = '';
     if (gIntHumanScore === 5)
     {
-        console.log("[DISPLAY] User is the winner of Rock-Paper-Scissors Game. Congrats!");
+        strPlayerWins = "User is the winner of Rock-Paper-Scissors Game. Congrats!";
     }
     else
     {
-        console.log("[DISPLAY] Computer is the winner of Rock-Paper-Scissors Game. Better luck next time!");
-    }  
+        strPlayerWins = "Computer is the winner of Rock-Paper-Scissors Game. Better luck next time!";
+    }
+    divDsplyWnnr.textContent = strPlayerWins;
+    
+    console.log(`[DISPLAY] ${strPlayerWins}`);
 }
 
 // Function to play computer's choice
